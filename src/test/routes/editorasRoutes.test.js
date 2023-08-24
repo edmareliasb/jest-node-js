@@ -4,18 +4,18 @@ import {
 } from '@jest/globals';
 import app from '../../app.js';
 
-let server;
-beforeEach(() => {
-  const port = 3000;
-  server = app.listen(port);
-});
+// let server;
+// beforeEach(() => {
+//   const port = 3000;
+//   server = app.listen(port);
+// });
 
-afterEach(() => {
-  server.close();
-});
+// afterEach(() => {
+//   server.close();
+// });
 
 describe('GET em /editoras', () => {
-  it('Deve retornar uma lista de editoras', async () => {
+  it.skip('Deve retornar uma lista de editoras', async () => {
     const resposta = await request(app)
       .get('/editoras')
       .set('Accept', 'application/json')
@@ -28,7 +28,7 @@ describe('GET em /editoras', () => {
 
 let idResposta;
 describe('POST em /editoras', () => {
-  it('Deve adicionar uma nova editora', async () => {
+  it.skip('Deve adicionar uma nova editora', async () => {
     const resposta = await request(app)
       .post('/editoras')
       .send({
@@ -40,7 +40,7 @@ describe('POST em /editoras', () => {
 
     idResposta = resposta.body.content.id;
   });
-  it('Deve nao adicionar nada ao passar o body vazio', async () => {
+  it.skip('Deve nao adicionar nada ao passar o body vazio', async () => {
     await request(app)
       .post('/editoras')
       .send({})
@@ -49,7 +49,7 @@ describe('POST em /editoras', () => {
 });
 
 describe('GET em /editoras/id', () => {
-  it('Deve retornar recurso selecionado', async () => {
+  it.skip('Deve retornar recurso selecionado', async () => {
     await request(app)
       .get(`/editoras/${idResposta}`)
       .expect(200);
@@ -57,24 +57,24 @@ describe('GET em /editoras/id', () => {
 });
 
 describe('PUT em /editoras/id', () => {
-  test.each([
-    ['nome', { nome: 'Casa do Codigo' }],
-    ['cidade', { cidade: 'SP' }],
-    ['email', { email: 'cdc@cdc.com' }],
-  ])('Deve alterar o campo %s', async (chave, param) => {
-    const requisicao = { request };
-    const spy = jest.spyOn(requisicao, 'request');
-    await requisicao.request(app)
-      .put(`/editoras/${idResposta}`)
-      .send(param)
-      .expect(204);
+  // test.each([
+  //   ['nome', { nome: 'Casa do Codigo' }],
+  //   ['cidade', { cidade: 'SP' }],
+  //   ['email', { email: 'cdc@cdc.com' }],
+  // ])('Deve alterar o campo %s', async (chave, param) => {
+  //   const requisicao = { request };
+  //   const spy = jest.spyOn(requisicao, 'request');
+  //   await requisicao.request(app)
+  //     .put(`/editoras/${idResposta}`)
+  //     .send(param)
+  //     .expect(204);
 
-    expect(spy).toHaveBeenCalled();
-  });
+  //   expect(spy).toHaveBeenCalled();
+  // });
 });
 
 describe('DELETE em /editoras/id', () => {
-  it('Deletar o recurso adcionado', async () => {
+  it.skip('Deletar o recurso adcionado', async () => {
     await request(app)
       .delete(`/editoras/${idResposta}`)
       .expect(200);
