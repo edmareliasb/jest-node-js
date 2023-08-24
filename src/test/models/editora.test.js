@@ -3,7 +3,7 @@ import {
 } from '@jest/globals';
 import Editora from '../../models/editora';
 
-describe('Testando o modelo Editora', () => {
+describe('Testando modelo Editora', () => {
   const objetoEditora = {
     nome: 'CDC',
     cidade: 'Sao Paulo',
